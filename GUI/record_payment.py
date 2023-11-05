@@ -112,5 +112,3 @@ def payment_recorder() :
 
     return  return_dict
 
-l = payment_recorder()
-print(l)
