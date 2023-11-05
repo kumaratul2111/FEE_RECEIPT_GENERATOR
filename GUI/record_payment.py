@@ -1,72 +1,116 @@
 import tkinter as tk
-from tkinter import PhotoImage
+from tkinter import ttk
 from PIL import Image, ImageTk
 
-def record_payment():
-    student_roll = roll_entry.get()
-    payment_amount = payment_entry.get()
-    
-    # You can process and record the payment here
-    # For this example, we'll just print the values
-    print(f"Student Roll: {student_roll}")
-    print(f"Payment Amount: {payment_amount}")
-
-    
-     # Clear the entry fields by updating them with empty strings
-    roll_entry.delete(0, tk.END)
-    payment_entry.delete(0, tk.END)
-    
-    # Open a new window to show the success message
-    success_window = tk.Toplevel(root)
-    success_window.title("Success")
-
-    # Create a label to display the success message
-    success_label = tk.Label(success_window, text="Payment Recorded Successfully!", font=("Helvetica", 20))
-    success_label.pack(padx=20, pady=20)
-
 def payment_recorder() :
-    # Create the main window
-    root = tk.Tk()
-    root.title("Payment Record")
+    # Create the main application window
+    return_dict = {}
+    app = tk.Tk()
+    app.title("Payment Recorder")
+
+    # Set a custom background color
+    app.configure(bg="#f2f2f2")
 
     # Get the screen dimensions
-    win_width = root.winfo_screenwidth()
-    win_height = root.winfo_screenheight()
+    win_width = app.winfo_screenwidth()
+    win_height = app.winfo_screenheight()
 
-    # Set the window size to match the screen dimensions
-    root.geometry(f"{win_width}x{win_height}")
+    # Create a frame to hold the content and make it expand to fill the window
+    content_frame = ttk.Frame(app)
+    content_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+
+    # Create and place labels and input fields with modern styling
+    label_style = ttk.Style()
+    label_style.configure("TLabel", font=("Helvetica", 14), foreground="black")
+    entry_style = ttk.Style()
+    entry_style.configure("TEntry", font=("Helvetica", 14), foreground="black", width=30)  # Increased field width
+
+    # Define a list of available years (customize as needed)
+    available_years = [str(year) for year in range(2020, 2031)]  # Example: 2020 to 2030
+
+    # Create and style the Combobox for the "Year" field
+    year_label = ttk.Label(content_frame, text="Year:")
+    year_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+    year_var = tk.StringVar()
+    year_combobox = ttk.Combobox(content_frame, textvariable=year_var, values=available_years, state="readonly")
+    year_combobox.grid(row=0, column=1, padx=10, pady=10, sticky="w")
+    year_combobox.set("Select Year")
 
 
+    # Define a list of available months
+    available_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-    # Resize the image to fit the window
-    # img = img.resize((win_width, win_height))
+    # Create and style the Combobox for the "Month" field
+    month_label = ttk.Label(content_frame, text="Month:")
+    month_label.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+    month_var = tk.StringVar()
+    month_combobox = ttk.Combobox(content_frame, textvariable=month_var, values=available_months, state="readonly")
+    month_combobox.grid(row=1, column=1, padx=10, pady=10, sticky="w")
+    month_combobox.set("Select Month")
 
-    # Create a PhotoImage from the resized image
-    # bg_image = ImageTk.PhotoImage(img)
-    # bg_label = tk.Label(root, image=bg_image)
-    # bg_label.place(relwidth=1, relheight=1)
+    # Define a list of available classes
+    available_classes = ["Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8"]
 
-    # Set a custom color scheme
-    label_color = "#ecf0f1"  # Light Gray
-    button_color = "#2ecc71"  # Green
-    roll_color="black" # Red
-    # Create labels
-    roll_label = tk.Label(root, text="Student Roll:", bg=roll_color, fg=label_color, font=("Helvetica", 20))
-    payment_label = tk.Label(root, text="Payment:", bg=roll_color, fg=label_color, font=("Helvetica", 20))
+    # Create and style the Combobox (dropdown) for the "Class" field
+    class_label = ttk.Label(content_frame, text="Class:")
+    class_label.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+    class_var = tk.StringVar()
+    class_combobox = ttk.Combobox(content_frame, textvariable=class_var, values=available_classes, state="readonly")
+    class_combobox.grid(row=2, column=1, padx=10, pady=10, sticky="w")
+    class_combobox.set("Select Class")
 
-    # Create entry fields
-    roll_entry = tk.Entry(root, font=("Helvetica", 20))
-    payment_entry = tk.Entry(root, font=("Helvetica", 20))
+    # Define roll_var and create the entry widget for the "Hostel Fee" field
+    roll_label = ttk.Label(content_frame, text="Roll:")
+    roll_label.grid(row=3, column=0, padx=10, pady=10, sticky="w")
+    roll_var = tk.StringVar()
+    roll_entry = ttk.Entry(content_frame, textvariable=roll_var, style="TEntry")
+    roll_entry.grid(row=3, column=1, padx=10, pady=10, sticky="w")
 
-    # Create the record button
-    record_button = tk.Button(root, text="Record", command=record_payment, bg=button_color, fg=label_color)
+    # Define payment_var and create the entry widget for the "Tuition Fee" field
+    payment_label = ttk.Label(content_frame, text="Payment:")
+    payment_label.grid(row=4, column=0, padx=10, pady=10, sticky="w")
+    payment_var = tk.DoubleVar()
+    payment_entry = ttk.Entry(content_frame, textvariable=payment_var, style="TEntry")
+    payment_entry.grid(row=4, column=1, padx=10, pady=10, sticky="w")
 
-    # Center the labels and button by making them span multiple columns
-    roll_label.grid(row=0, column=0, padx=10, pady=10, columnspan=4, sticky="e")
-    payment_label.grid(row=1, column=0, padx=10, pady=10, columnspan=4, sticky="e")
-    roll_entry.grid(row=0, column=4, padx=10, pady=10, columnspan=4, sticky="w")
-    payment_entry.grid(row=1, column=4, padx=10, pady=10, columnspan=4, sticky="w")
-    record_button.grid(row=2, column=0, padx=10, pady=10, columnspan=8)
+    # Create and style the Submit button
+    submit_button = ttk.Button(content_frame, text="Submit", command=app.destroy, style="TButton")
+    submit_button.grid(row=8, columnspan=2, padx=10, pady=10)
 
-    # Start the main event loop
-    root.mainloop()
+    # Create a custom style for the button with a modern look
+    button_style = ttk.Style()
+    button_style.configure("TButton", font=("Helvetica", 14, "bold"), foreground="white", background="green")
+
+    # Configure row and column weights to make the content frame expand to fill the window
+    content_frame.grid_rowconfigure(0, weight=1)
+    content_frame.grid_columnconfigure(0, weight=1)
+
+    # Start the main GUI loop
+    app.mainloop()
+    
+    #Reading the variables
+    year = year_var.get()
+    month = month_var.get()
+    class_name = class_var.get()
+    payment = payment_var.get()
+    roll = roll_var.get()
+
+    #Adding variables to dictionary to be returned
+    return_dict['year'] = year
+    return_dict['month'] = month
+    return_dict['class_name'] = class_name
+    return_dict['payment'] = payment
+    return_dict['roll'] = roll
+
+    #Printing the values
+    print("Data saved to variables")
+    print(f"Year: {year}")
+    print(f"Month: {month}")
+    print(f"class name: {class_name}")
+    print(f"Payment: {payment }")
+    print(f"Roll: {roll }")
+
+    return  return_dict
+
+l = payment_recorder()
+print(l)
