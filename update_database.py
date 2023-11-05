@@ -62,6 +62,3 @@ def update_mess_fee(table_name, mess_fee, month) :
         if connection_object is not None :
             connection_object.close();
 
-update_hostel_fee('CLASS1', 1000, 'March')
-update_transportation_fee('CLASS1', 20000, 'March')
-update_mess_fee('CLASS1', 30000, 'March')
