@@ -3,7 +3,7 @@ import GUI.record_payment
 import GUI.fee_receipt_generator as g
 import update_database
 
-g.val = 1
+g.val = 3
 while (g.val != 4) :
     g.input_choice()
     if g.val == 1 :

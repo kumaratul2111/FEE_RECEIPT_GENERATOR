@@ -68,4 +68,3 @@ def input_choice() :
 
     # Start the main GUI loop
     root.mainloop()
-    
