@@ -2,72 +2,18 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-def save_data():
-    # Access data from the variables
-    year = year_var.get()
-    month = month_var.get()
-    class_name = class_var.get()
-    tuition_fee = tuition_fee_var.get()
-    hostel_fee = hostel_fee_var.get()
-    mess_fee = mess_fee_var.get()
-    transportation_fee = transportation_fee_var.get()
-    other_fee = other_fee_var.get()
-
-    # Optionally, you can perform additional actions with the data here
-    print("Data saved to variables")
-    print(f"Year: {year}")
-    print(f"Month: {month}")
-    print(f"class name: {class_name}")
-    print(f"Tution Fee: {tuition_fee }")
-    print(f"Hostel Fee: {hostel_fee }")
-    print(f"Hostel Fee: {hostel_fee }")
-    print(f"Mess Fee: {mess_fee}")
-    print(f"Transporation Fee: {transportation_fee }")
-    print(f"Other Fee: {other_fee }")
-
-    # Create a new window to show the success message
-    success_window = tk.Toplevel(app)
-    success_window.title("Success")
-
-    # Add a label with the success message
-    success_label = ttk.Label(success_window, text="Data recorded successfully!", font=("Helvetica", 16), foreground="green")
-    success_label.pack(padx=20, pady=20)
-
-    # Clear the entry fields after successful recording
-    year_var.set("")
-    month_var.set("")
-    class_var.set("")
-    tuition_fee_var.set(0.0)
-    hostel_fee_var.set(0.0)
-    mess_fee_var.set(0.0)
-    transportation_fee_var.set(0.0)
-    other_fee_var.set(0.0)
-
 def fee_receipt_generator() :
     # Create the main application window
+    return_dict = {}
     app = tk.Tk()
     app.title("Fee Receipt Generator")
 
     # Set a custom background color
     app.configure(bg="#f2f2f2")
 
-    # Open and convert the image using Pillow (PIL)
-    #img = Image.open("iitb.jpg")
-    #img = img.convert("RGB")
-
     # Get the screen dimensions
     win_width = app.winfo_screenwidth()
     win_height = app.winfo_screenheight()
-
-    # Resize the image to fit the window
-    #img = img.resize((win_width, win_height))
-
-    # Create a PhotoImage from the resized image
-    #bg_image = ImageTk.PhotoImage(img)
-
-    # Create a Label to display the image in the background
-    #bg_label = tk.Label(app, image=bg_image)
-    #bg_label.place(relwidth=1, relheight=1)
 
     # Create a frame to hold the content and make it expand to fill the window
     content_frame = ttk.Frame(app)
@@ -101,7 +47,6 @@ def fee_receipt_generator() :
     month_combobox = ttk.Combobox(content_frame, textvariable=month_var, values=available_months, state="readonly")
     month_combobox.grid(row=1, column=1, padx=10, pady=10, sticky="w")
     month_combobox.set("Select Month")
-
 
     # Define a list of available classes
     available_classes = ["Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8"]
@@ -150,7 +95,7 @@ def fee_receipt_generator() :
     other_fee_entry.grid(row=7, column=1, padx=10, pady=10, sticky="w")
 
     # Create and style the Submit button
-    submit_button = ttk.Button(content_frame, text="Submit", command=save_data, style="TButton")
+    submit_button = ttk.Button(content_frame, text="Submit", command=app.destroy, style="TButton")
     submit_button.grid(row=8, columnspan=2, padx=10, pady=10)
 
     # Create a custom style for the button with a modern look
@@ -163,4 +108,38 @@ def fee_receipt_generator() :
 
     # Start the main GUI loop
     app.mainloop()
+    
+    #Reading the variables
+    year = year_var.get()
+    month = month_var.get()
+    class_name = class_var.get()
+    tuition_fee = tuition_fee_var.get()
+    hostel_fee = hostel_fee_var.get()
+    mess_fee = mess_fee_var.get()
+    transportation_fee = transportation_fee_var.get()
+    other_fee = other_fee_var.get()
+
+    #Adding variables to dictionary to be returned
+    return_dict['year'] = year
+    return_dict['month'] = month
+    return_dict['class_name'] = class_name
+    return_dict['tuition_fee'] = tuition_fee
+    return_dict['hostel_fee'] = hostel_fee
+    return_dict['mess_fee'] = mess_fee
+    return_dict['transportation_fee'] = transportation_fee
+    return_dict['other_fee'] = other_fee
+
+    #Printing the values
+    print("Data saved to variables")
+    print(f"Year: {year}")
+    print(f"Month: {month}")
+    print(f"class name: {class_name}")
+    print(f"Tution Fee: {tuition_fee }")
+    print(f"Hostel Fee: {hostel_fee }")
+    print(f"Hostel Fee: {hostel_fee }")
+    print(f"Mess Fee: {mess_fee}")
+    print(f"Transporation Fee: {transportation_fee }")
+    print(f"Other Fee: {other_fee }")
+
+    return  return_dict
 
