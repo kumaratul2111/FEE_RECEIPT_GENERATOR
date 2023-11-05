@@ -111,6 +111,3 @@ def payment_recorder() :
     print(f"Roll: {roll }")
 
     return  return_dict
-
-l = payment_recorder()
-print(l)
