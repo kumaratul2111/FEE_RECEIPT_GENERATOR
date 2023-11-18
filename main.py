@@ -8,9 +8,9 @@ while (g.val != 4) :
     g.input_choice()
     if g.val == 1 :
         l = GUI.generate_fee_receipt.fee_receipt_generator()
-        print(l)
+        print("main", l, type(l))
     elif g.val == 2 :
         l = GUI.record_payment.payment_recorder()
-        print(l)
+        print("main", l)
     elif g.val == 3 :
         print("Nothing to do right now")
