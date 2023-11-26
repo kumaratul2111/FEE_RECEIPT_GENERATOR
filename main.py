@@ -8,8 +8,6 @@ import send_email
 import fee_pdf
 import payment_pdf
 
-def open_gui(script_name):
-    subprocess.run(["python3", script_name])
 
 def show_frame(frame):
     frame.tkraise()
