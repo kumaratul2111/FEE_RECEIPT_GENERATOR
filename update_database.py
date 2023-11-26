@@ -20,7 +20,7 @@ def update_tuition_fee(table_name, tuition_fee, month, year) :
         if connection_object is not None :
             connection_object.close();
 
-
+#updating the hostel fees
 def update_hostel_fee(table_name, hostel_fee, month, year) :
     sql_add_column_query = "alter table " + table_name +" add column " +month+"_HOSTEL_FEE_"+year + " numeric default 0;"
     print(sql_add_column_query)
@@ -41,7 +41,7 @@ def update_hostel_fee(table_name, hostel_fee, month, year) :
         if connection_object is not None :
             connection_object.close();
 
-
+# Updating the transporation after insertion.
 def update_transportation_fee(table_name, transportation_fee, month, year) :
     sql_add_column_query = "alter table " + table_name +" add column " +month+"_TRANSPORTATION_FEE_"+year + " numeric default 0;"
     print(sql_add_column_query)
@@ -62,7 +62,7 @@ def update_transportation_fee(table_name, transportation_fee, month, year) :
         if connection_object is not None :
             connection_object.close();
 
-
+#updating the mess fees
 def update_mess_fee(table_name, mess_fee, month, year) :
     sql_add_column_query = "alter table " + table_name +" add column " +month+"_MESS_FEE_"+year + " numeric default 0;"
     print(sql_add_column_query)
@@ -82,7 +82,7 @@ def update_mess_fee(table_name, mess_fee, month, year) :
     finally :
         if connection_object is not None :
             connection_object.close();
-
+#updaining the other fees
 def update_other_fee(table_name, other_fee, month, year) :
     sql_add_column_query = "alter table " + table_name +" add column " +month+"_OTHER_FEE_"+year + " numeric default 0;"
     print(sql_add_column_query)
@@ -105,7 +105,7 @@ def update_other_fee(table_name, other_fee, month, year) :
     finally :
         if connection_object is not None :
             connection_object.close();
-
+#updating remaining dues
 def update_remaining_dues(table_name, month, year) :
     sql_update_query = "Update " + table_name + " set remaining_dues = remaining_dues + " + month+"_TUITION_FEE_"+year+ " + " + month+"_HOSTEL_FEE_"+year+ " + " + month+"_TRANSPORTATION_FEE_"+year+ " + " + month+"_MESS_FEE_"+year+ " + " + month+"_OTHER_FEE_"+year+ ";"
     print(sql_update_query) 
