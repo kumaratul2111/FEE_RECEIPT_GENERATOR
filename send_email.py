@@ -30,7 +30,7 @@ def send_email(row, month, year) :
 
     # Attach PDF part
     with open(pdf_path, 'rb') as pdf_file:
-        pdf_attach = MIMEApplication(pdf_file.read(), name='document.pdf')
+        pdf_attach = MIMEApplication(pdf_file.read(), name='Fee_receipt.pdf')
         message.attach(pdf_attach)
 
     # Connect to the SMTP server
