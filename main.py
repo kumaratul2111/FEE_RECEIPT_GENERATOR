@@ -11,7 +11,7 @@ import payment_pdf
 
 def show_frame(frame):
     frame.tkraise()
-
+# This function takes input from GUI and show a bar plot of the requested data.
 def analysis():
 
     l3 = {}
@@ -61,6 +61,7 @@ def analysis():
     # success_label = tk.Label(success_window, text="Bar Plot Generated Successfully !", font=("Helvetica", 20))
     # success_label.pack(padx=20, pady=20)
 
+# This function takes input from GUI and create fee receipts for all students in a class. It also send the receipts as email attachment.
 def fee_receipt_generator():
    
     l1 = {}
@@ -98,6 +99,7 @@ def fee_receipt_generator():
     success_label.pack(padx=20, pady=20)
 
 
+# This function takes input from GUI and record payment for a student.
 def payment_recorder() :
 
     l2 = {}
